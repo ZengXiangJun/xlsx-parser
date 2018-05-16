@@ -28,9 +28,9 @@ module.exports = {
   SHEETS_TO_TXT: 'Sheet to TXT',
   SHEETS_TO_JSON: 'Sheet to JSON',
   SHEETS_TO_FORMULAE: 'Sheet to FORMULAE',
-  CURR_SHEET_NAME: 'Curr sheet name'
+  CURR_SHEET_NAME: 'Curr sheet name',
   CURR_SHEET: 'Curr sheet',
-  CURR_SHEET_TO_JSON: 'Curr sheet to JSON'
+  CURR_SHEET_TO_JSON: 'Curr sheet to JSON',
   CURR_SHEET_ROWS: 'Curr sheet rows',
   CURR_SHEET_COLS: 'Curr sheet cols',
   CURR_CELL_POS: 'Curr cell pos',

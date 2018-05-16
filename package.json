@@ -1,9 +1,9 @@
 {
   "name": "xlsx-parser",
-  "version": "0.0.0",
-  "configuratorVersion": "0.0.0",
-  "description": "",
-  "keywords": [],
+  "version": "0.0.1",
+  "configuratorVersion": "0.0.1",
+  "description": "解析生成Excel",
+  "keywords": "",
   "author": {
     "name": "",
     "email": ""
@@ -50,5 +50,9 @@
   "dependencies": {
     "canvas-datagrid": "^0.20.14",
     "xlsx": "^0.12.12"
-  }
+  },
+  "languages": [
+    "zh-cn"
+  ],
+  "ioType": "mixed"
 }
