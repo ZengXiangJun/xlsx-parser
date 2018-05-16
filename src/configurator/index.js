@@ -3,7 +3,6 @@ var locale = require('./i18n');
 var template = require('./index.html');
 var configurator = {
     constructor: function() {
-        var that = this;
         var tplHTML = template({
             locale: locale()
         });
@@ -11,6 +10,9 @@ var configurator = {
     },
     setProfile: function(profile) {
         profile = $.extend({
+            loadData: false,
+            editExcel: true,
+            outputExcel: true
         }, profile);
         var title = locale('title');
         var dataSpecification = locale('dataSpecification');
@@ -25,21 +27,113 @@ var configurator = {
                 $('#dataWrap').attr('srcId', src.id);
             }
         });
-        var that = this;
+        $('#loadData').prop('checked', profile.loadData);
+        $('#editExcel').prop('checked', profile.editExcel);
+        $('#outputExcel').prop('checked', profile.outputExcel);
     },
     getProfile: function() {
-        return {
-            srcId: $('#dataWrap').attr('srcId'),
-        };
+        var srcId = $('#dataWrap').attr('srcId');
+        var loadData = $('#outputExcel').val();
+        if (loadData && !srcId) {
+            alert('请设置数据源');
+        } else {
+            return {
+                srcId: $('#dataWrap').attr('srcId'),
+                loadData: $('#loadData').prop('checked'),
+                editExcel: $('#editExcel').prop('checked'),
+                outputExcel: $('#outputExcel').prop('checked')
+            }
+        }
     },
     getSupportedEventList: function(profile) {
-        return []
+        var data = [{
+            'id': 'onExcelLoaded',
+            'name': locale('onExcelLoaded'),
+            'des': "Triggered when excel loaded"
+        }, {
+            'id': 'onSheetClick',
+            'name': locale('onSheetClick'),
+            'des': "Triggered when sheet click"
+        }]
+        if ($('#outputExcel').prop('checked')) {
+            data = data.concat([{
+                'id': 'onExcelOutputed',
+                'name': locale('onExcelOutputed'),
+                'des': "Triggered when excel outputed"
+            }])
+        }
+        if ($('#editExcel').prop('checked')) {
+            data = data.concat([{
+                'id': 'onCellFocus',
+                'name': locale('onCellFocus'),
+                'des': "Triggered when cell focus"
+            }, {
+                'id': 'onCellBlur',
+                'name': locale('onCellBlur'),
+                'des': "Triggered when cell blur"
+            }])
+        }
+        return data;
     },
-
     getSupportedVariableList: function(profile) {
-        return []
+        return [{
+                name: 'EXCEL_DATA',
+                type: 'object',
+                des: locale('EXCEL_DATA')
+            }, {
+                name: 'SHEET_NAMES',
+                type: 'array',
+                des: locale('SHEET_NAMES')
+            }, {
+                name: 'SHEETS',
+                type: 'object',
+                des: locale('SHEETS')
+            }, {
+                name: 'SHEETS_TO_CSV',
+                type: 'object',
+                des: locale('SHEETS_TO_CSV')
+            }, {
+                name: 'SHEETS_TO_TXT',
+                type: 'object',
+                des: locale('SHEETS_TO_TXT')
+            }, {
+                name: 'SHEETS_TO_JSON',
+                type: 'object',
+                des: locale('SHEETS_TO_JSON')
+            }, {
+                name: 'SHEETS_TO_FORMULAE',
+                type: 'object',
+                des: locale('SHEETS_TO_FORMULAE')
+            }, {
+                name: 'CURR_SHEET_NAME',
+                type: 'string',
+                des: locale('CURR_SHEET_NAME')
+            }, {
+                name: 'CURR_SHEET',
+                type: 'object',
+                des: locale('CURR_SHEET_DATA')
+            }, {
+                name: 'CURR_SHEET_TO_JSON',
+                type: 'object',
+                des: locale('CURR_SHEET_TO_JSON')
+            }, {
+                name: 'CURR_SHEET_ROWS',
+                type: 'number',
+                des: locale('CURR_SHEET_ROWS')
+            }, {
+                name: 'CURR_SHEET_COLS',
+                type: 'number',
+                des: locale('CURR_SHEET_COLS')
+            }, {
+                name: 'CURR_CELL_POS',
+                type: 'string',
+                des: locale('CURR_CELL_POS')
+            }, {
+                name: 'CURR_CELL_CONTENT',
+                type: 'string',
+                des: locale('CURR_CELL_CONTENT')
+            }]
     },
-
     getDependentVariableList: function(profile) {
         return [];
     }

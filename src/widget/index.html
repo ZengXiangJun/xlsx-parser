@@ -1,5 +1,14 @@
-<div class="sheetWindow">
-</div>
-<div class="operate ui-state-default">
-	<input type="file" id="loadSheet">
+<div class="wrap">
+	<div class="sheetWindow">
+	</div>
+	<div class="operate ui-state-default">
+		<div class="sheets"></div>
+		<div class="tool">
+			<input type="file" id="fileLoader">
+			<a id="loadExcel">{{locale.loadExcel}}</a>
+			{{#if outputExcel}}
+				<a id="outputExcel">{{locale.outputExcel}}</a>
+			{{/if}}
+		</div>
+	</div>
 </div>
