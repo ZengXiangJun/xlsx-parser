@@ -161,6 +161,7 @@ Enhancer.registerWidget({
             SHEETS_TO_JSON[key] = XLSX.utils.sheet_to_json(this.workbook.Sheets[key]);
             SHEETS_TO_FORMULAE[key] = XLSX.utils.sheet_to_formulae(this.workbook.Sheets[key]);
         }
+        console.log(CURR_SHEET)
         var data = {
             'EXCEL_DATA': EXCEL_DATA,
             'SHEET_NAMES': SHEET_NAMES,

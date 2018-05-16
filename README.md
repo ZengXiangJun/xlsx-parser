@@ -2,7 +2,7 @@
 ### 查看Demo 【账号】test 【密码】123456
 ### 简介 [Demo](http://47.96.99.14:5301/#115)
 - xlsx-parser是基于[Enhancer](https://enhancer.io)平台开发的组件, 能在此平台上良好运行。
-- xlsx-parser通过将 数据 <——> Html <——> Excel 任意转换。
+- xlsx-parser通过将 数据 , Html 和 Excel 任意转换。
 
 ### 生成界面
 ![](https://github.com/ZengXiangJun/xlsx-parser/blob/master/images/2.png)
@@ -11,103 +11,116 @@
 
 ### 使用说明
 - 在[Ehancer](https://enhancer.io)上注册，新建项目使用此组件。
-- 在图二界面设置组件的数据源，模板以及相关配置。
+- 在图二界面设置组件的数据源，及相关配置。
 
 ### 数据源设置
-- 数据源格式说明：必须是对象数组，一个对象通过模板生成一个对应的单元，如 1 所示。
+- 数据源格式说明：必须是对象数组，如 2 所示。
 ```
-[{                                 
-    "key": "value",
-    ...
-}, {                               
-    "key": "value",
-    ...
-}...]
+[{
+    "A": 1,           【必须】键 A B C 表示表头，1 2 3 表示第一行数据
+    "B": 2,
+    "C": 3,
+    ...               【可扩展】其它的表头
+}, {                  【可扩展】递增行数据
+    "A": 11,
+    "B": 22,
+    "C": 33
+}]
 ```
 
-### 模板设置
-- 模板分为上下两部分，上部分可包含图片，标题，段落，图标；下部分可包含按钮。如 5 所示。
-- 通过拖动 6 位置调节模板的大小。
-- 通过 3 位置的操作按钮在模板中添加元素。双击模板中的元素，会弹出对应的编辑框，如 4 所示，并在对应的编辑框中对元素进行编辑。
+### 组件功能
+- 将数据导出为Excel
+- 将Excel导入并解析为多种格式数据
+- 可通过页面简单修改Excel文件
 
-元素类型|可编辑内容|说明
----|---|---
-图片|地址来源，高度，宽度，透明度，倒角|来源设置：固定的文本或 @key@, @var@ 从数据源,变量中取值。
-标题|文本来源，字体，字号，字间距，字粗|来源设置：同上。
-段落|文本来源，字体，字号，行距，有无边框，字粗，透明度|来源设置：同上。
-图标|样式， 字号
-按钮|是否显示图标，图标的样式，按钮的名称|每增加一个按钮，会生成此按钮唯一的id和点击事件，可设置按钮点击事件触发时的脚本。
-
-特别说明：
-1. 标题和段落支持富文本，可以在里面添加html标签。
-2. 如 `<a style='color:red'></a>`, 标签里面需要设置style,class等时，请用 '' 代替 ""  。 
-
-### 组件配置 [Demo](http://47.96.99.14:5301/#105)
-- 通过组件配置设置组件的全局特性，见 2 所示
-- 设置间距：每个单元的间距，请设置 >= 1 的正整数
-- 选中高亮：单元选中时是否高亮
-- 悬浮高亮：单元鼠标悬浮时是否高亮
-- 支持排序：单元可通过拖动改变顺序
-- 设置分页：分页显示单元，此功能仅在数据源是从数据库获取时有效
-- 分页位置：分页器的位置，可为左中右
-- 每页数量：分页显示时，每页显示的数量，请设置 >= 1 的正整数
 
 ### 可用事件说明
-#### 单击单元（On unit click）
-- 【事件 ID】onUnitClick
-- 【触发时机】单击单元时。
+#### 单击单元（On Excel Loaded）
+- 【事件 ID】onExcelLoaded
+- 【触发时机】Excel加载到页面上时。
 
-#### 选中单元（On unit selected）
-- 【事件 ID】onUnitSelected
-- 【触发时机】选中单元时。
+#### 选中单元（On Sheet Click）
+- 【事件 ID】onSheetClick
+- 【触发时机】单击页面上表格时。
 
-#### 选中单元变化（On selected units change）
-- 【事件 ID】onSelectedUnitsChange
-- 【触发时机】选中单元变化时。
+#### 选中单元变化（onExcelOutputed）
+- 【事件 ID】onExcelOutputed
+- 【触发时机】导出Excel时。
 
-#### 单元顺序变化（On unit index change）
-- 【事件 ID】onUnitIndexChange
-- 【触发时机】单元顺序变化时。
+#### 单元顺序变化（onCellFocus）
+- 【事件 ID】onCellFocus
+- 【触发时机】页面表格单元获得焦点时（编辑）。
 
-#### 点击按钮 （On button click）
-- 【事件 ID】随机生成
-- 【触发时机】点击按钮时。
+#### 点击按钮 （onCellBlur）
+- 【事件 ID】onCellBlur
+- 【触发时机】页面表格失去焦点时。
 
-### 可用变量说明 [Demo](http://47.96.99.14:5301/#100)
-#### Units
-- 【类型】array
-- 【说明】所有单元数据
-- 【示例】[{"key": "value"}]
-
-#### CURR_UNIT_INDEX
-- 【类型】number
-- 【说明】当前单元序号
-- 【示例】0
-
-#### CURR_UNIT_DATA
+### 可用变量说明 [Demo](http://47.96.99.14:5301/#114)
+#### EXCEL_DATA
 - 【类型】object
-- 【说明】当前单元数据
-- 【示例】{"key": "value"}
+- 【说明】Excel数据
+- 【示例】{'SheetNames': [], 'Sheets': {}}
 
-#### SELECTED_UNITS_INDEX
+#### SHEET_NAMES
 - 【类型】array
-- 【说明】选中单元序号
-- 【示例】[1, 2, 3]
+- 【说明】Excel中所有表名称
+- 【示例】['sheet1', 'sheet2']
 
-#### LAST_SELECTED_UNIT_INDEX
+#### SHEETS
+- 【类型】object
+- 【说明】所有表数据
+- 【示例】{'sheet1': {}, 'sheet2': {}}
+
+#### SHEETS_TO_CSV
+- 【类型】object
+- 【说明】所有表CSV格式数据
+- 【示例】{'sheet1': ''}
+
+#### SHEETS_TO_JSON
+- 【类型】object
+- 【说明】所有表JSON格式数据
+- 【示例】{'sheet1': []}
+
+#### SHEETS_TO_FORMULAE
+- 【类型】object
+- 【说明】所有表FORMULAE格式数据
+- 【示例】{'sheet1': []}
+
+#### CURR_SHEET_NAME
+- 【类型】string
+- 【说明】当前表名称
+- 【示例】"表-1"
+
+#### CURR_SHEET
+- 【类型】object
+- 【说明】当前表数据
+- 【示例】{!ref: ''}
+
+#### CURR_SHEET_TO_JSON
+- 【类型】array
+- 【说明】当前表JSON格式数据
+- 【示例】[{}, {}]
+
+#### CURR_SHEET_ROWS
 - 【类型】number
-- 【说明】最后选中单元序号
-- 【示例】0
+- 【说明】当前表行数（不包括表头）
+- 【示例】10
 
-#### BUTTON_EVENT_ID
-- 【类型】string
-- 【说明】按钮事件ID
-- 【示例】"button1524448415166"
+#### CURR_SHEET_COLS
+- 【类型】number
+- 【说明】当前表列数
+- 【示例】10
 
-#### BUTTON_EVENT_NAME
+#### CURR_CELL_POS
 - 【类型】string
-- 【说明】按钮事件名称
-- 【示例】"按钮-1"
+- 【说明】当前单元格位置（包括表头， 同Excel中单元格位置）
+- 【示例】"A1"
+
+#### CURR_CELL_CONTENT
+- 【类型】string
+- 【说明】当前单元格内容
+- 【示例】"统计"
+
 
 ### 其它
 - [Enhancer 教程](https://enhancer.io/tutorials)
