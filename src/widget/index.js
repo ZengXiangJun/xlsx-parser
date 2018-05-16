@@ -145,8 +145,8 @@ Enhancer.registerWidget({
         var CURR_SHEET_ROWS = CURR_SHEET_TO_JSON.length;
         var CURR_SHEET_COLS = 0;
         CURR_SHEET_TO_JSON.forEach(function(val) {
-            if (val.length > CURR_SHEET_COLS) {
-                CURR_SHEET_COLS = val.length;
+            if (Object.getOwnPropertyNames(val).length - 1 > CURR_SHEET_COLS) {
+                CURR_SHEET_COLS = Object.getOwnPropertyNames(val).length - 1;
             }
         })
         var $cell = $currSheet.find('td[isCurr="true"]');
