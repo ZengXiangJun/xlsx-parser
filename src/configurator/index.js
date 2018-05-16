@@ -110,7 +110,7 @@ var configurator = {
                 des: locale('CURR_SHEET_DATA')
             }, {
                 name: 'CURR_SHEET_TO_JSON',
-                type: 'object',
+                type: 'array',
                 des: locale('CURR_SHEET_TO_JSON')
             }, {
                 name: 'CURR_SHEET_ROWS',
