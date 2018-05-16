@@ -134,7 +134,6 @@ Enhancer.registerWidget({
         var SHEET_NAMES = this.workbook.SheetNames || [];
         var SHEETS = this.workbook.Sheets || {};
         var SHEETS_TO_CSV = {};
-        var SHEETS_TO_TXT = {};
         var SHEETS_TO_JSON = {};
         var SHEETS_TO_FORMULAE = {};
         var CURR_SHEET_NAME = $currSheet.attr('id') || '';
@@ -142,7 +141,7 @@ Enhancer.registerWidget({
         if (CURR_SHEET_NAME) {
             CURR_SHEET = this.workbook.Sheets[CURR_SHEET_NAME]
         }
-        var CURR_SHEET_TO_JSON = XLSX.utils.sheet_to_json(CURR_SHEET, {'header': 1});
+        var CURR_SHEET_TO_JSON = XLSX.utils.sheet_to_json(CURR_SHEET);
         var CURR_SHEET_ROWS = CURR_SHEET_TO_JSON.length;
         var CURR_SHEET_COLS = 0;
         CURR_SHEET_TO_JSON.forEach(function(val) {
@@ -159,10 +158,7 @@ Enhancer.registerWidget({
         }
         for (var key in this.workbook.Sheets) {
             SHEETS_TO_CSV[key] = XLSX.utils.sheet_to_csv(this.workbook.Sheets[key]);
-            SHEETS_TO_TXT[key] = XLSX.utils.sheet_to_txt(this.workbook.Sheets[key]);
-            SHEETS_TO_JSON[key] = XLSX.utils.sheet_to_json(this.workbook.Sheets[key], {
-                'header': 1
-            });
+            SHEETS_TO_JSON[key] = XLSX.utils.sheet_to_json(this.workbook.Sheets[key]);
             SHEETS_TO_FORMULAE[key] = XLSX.utils.sheet_to_formulae(this.workbook.Sheets[key]);
         }
         var data = {
@@ -170,7 +166,6 @@ Enhancer.registerWidget({
             'SHEET_NAMES': SHEET_NAMES,
             'SHEETS': SHEETS,
             'SHEETS_TO_CSV': SHEETS_TO_CSV,
-            'SHEETS_TO_TXT': SHEETS_TO_TXT,
             'SHEETS_TO_JSON': SHEETS_TO_JSON,
             'SHEETS_TO_FORMULAE': SHEETS_TO_FORMULAE,
             'CURR_SHEET_NAME': CURR_SHEET_NAME,

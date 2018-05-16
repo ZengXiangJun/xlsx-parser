@@ -93,10 +93,6 @@ var configurator = {
                 type: 'object',
                 des: locale('SHEETS_TO_CSV')
             }, {
-                name: 'SHEETS_TO_TXT',
-                type: 'object',
-                des: locale('SHEETS_TO_TXT')
-            }, {
                 name: 'SHEETS_TO_JSON',
                 type: 'object',
                 des: locale('SHEETS_TO_JSON')

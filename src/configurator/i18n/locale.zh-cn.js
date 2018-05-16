@@ -25,7 +25,6 @@ module.exports = {
   SHEET_NAMES: '所有表名称',
   SHEETS: '所有表数据',
   SHEETS_TO_CSV: '所有表CSV格式数据',
-  SHEETS_TO_TXT: '所有表TXT格式数据',
   SHEETS_TO_JSON: '所有表JSON格式数据',
   SHEETS_TO_FORMULAE: '所有表FORMULAE格式数据',
   CURR_SHEET_NAME: '当前表名称',

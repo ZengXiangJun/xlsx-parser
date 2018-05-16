@@ -25,7 +25,6 @@ module.exports = {
   SHEET_NAMES: 'Sheet Names',
   SHEETS: 'SHeet Datas',
   SHEETS_TO_CSV: 'Sheet to CSV',
-  SHEETS_TO_TXT: 'Sheet to TXT',
   SHEETS_TO_JSON: 'Sheet to JSON',
   SHEETS_TO_FORMULAE: 'Sheet to FORMULAE',
   CURR_SHEET_NAME: 'Curr sheet name',
