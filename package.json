@@ -1,7 +1,7 @@
 {
   "name": "xlsx-parser",
-  "version": "0.0.3",
-  "configuratorVersion": "0.0.3",
+  "version": "0.0.4",
+  "configuratorVersion": "0.0.4",
   "description": "解析生成Excel",
   "keywords": "",
   "author": {
