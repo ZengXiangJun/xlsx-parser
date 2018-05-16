@@ -2,7 +2,7 @@
 ### 查看Demo 【账号】test 【密码】123456
 ### 简介 [Demo](http://47.96.99.14:5301/#115)
 - xlsx-parser是基于[Enhancer](https://enhancer.io)平台开发的组件, 能在此平台上良好运行。
-- xlsx-parser通过将 数据 , Html 和 Excel 任意转换。
+- xlsx-parser可将 数据 , Html 和 Excel 任意转换。
 
 ### 生成界面
 ![](https://github.com/ZengXiangJun/xlsx-parser/blob/master/images/2.png)
@@ -10,7 +10,7 @@
 ![](https://github.com/ZengXiangJun/xlsx-parser/blob/master/images/1.png)
 
 ### 使用说明
-- 在[Ehancer](https://enhancer.io)上注册，新建项目使用此组件。
+- 在[Enhancer](https://enhancer.io)上注册，新建项目使用此组件。
 - 在图二界面设置组件的数据源，及相关配置。
 
 ### 数据源设置
@@ -35,23 +35,24 @@
 
 
 ### 可用事件说明
-#### 单击单元（On Excel Loaded）
+#### 加载Excel（On Excel Loaded）
 - 【事件 ID】onExcelLoaded
 - 【触发时机】Excel加载到页面上时。
 
-#### 选中单元（On Sheet Click）
-- 【事件 ID】onSheetClick
-- 【触发时机】单击页面上表格时。
-
-#### 选中单元变化（onExcelOutputed）
+#### 导出Excel（onExcelOutputed）
 - 【事件 ID】onExcelOutputed
 - 【触发时机】导出Excel时。
 
-#### 单元顺序变化（onCellFocus）
+#### 单击表格（On Sheet Click）
+- 【事件 ID】onSheetClick
+- 【触发时机】单击页面上表格时。
+
+
+#### 单元格获得焦点（onCellFocus）
 - 【事件 ID】onCellFocus
 - 【触发时机】页面表格单元获得焦点时（编辑）。
 
-#### 点击按钮 （onCellBlur）
+#### 单元格失去焦点 （onCellBlur）
 - 【事件 ID】onCellBlur
 - 【触发时机】页面表格失去焦点时。
 
