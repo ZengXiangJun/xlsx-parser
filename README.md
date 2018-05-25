@@ -48,11 +48,11 @@
 - 【触发时机】单击页面上表格时。
 
 
-#### 单元格获得焦点（onCellFocus）
+#### 单元格获得焦点（On Cell Focus）
 - 【事件 ID】onCellFocus
 - 【触发时机】页面表格单元获得焦点时（编辑）。
 
-#### 单元格失去焦点 （onCellBlur）
+#### 单元格失去焦点 （On Cell Blur）
 - 【事件 ID】onCellBlur
 - 【触发时机】页面表格失去焦点时。
 
