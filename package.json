@@ -49,7 +49,7 @@
   },
   "dependencies": {
     "canvas-datagrid": "^0.20.14",
-    "xlsx": "^0.12.12"
+    "xlsx": "^0.14.0"
   },
   "languages": [
     "zh-cn"

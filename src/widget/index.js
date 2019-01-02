@@ -108,6 +108,7 @@ Enhancer.registerWidget({
             if (/.xls$/.test(f.name) || /.xlsx$/.test(f.name)) {
                 that.excelName = f.name;
                 var reader = new FileReader();
+                console.log(XLSX)
                 reader.onload = function (e) {
                     that.workbook = XLSX.read(new Uint8Array(e.target.result), {
                         type: 'array',
@@ -115,6 +116,9 @@ Enhancer.registerWidget({
                         cellHTML: true,
                         cellText: false,
                         cellStyles: true,
+                        cellDates: true,
+                        dateNF: 'h:mm AM/PM',
+                        sheetStubs: true
                     });
                     that.affected();
                 }
