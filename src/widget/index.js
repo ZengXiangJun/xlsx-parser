@@ -186,7 +186,7 @@ Enhancer.registerWidget({
         return true
     },
     affected: function(zContext, page) {
-        var $container = this.$container;
+        var $container = this.getContainer();
         var profile = this.profile;
         $container.find('.sheetWindow').html('');
         $container.find('.sheets').html('');
