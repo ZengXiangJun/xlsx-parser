@@ -16,7 +16,8 @@ Enhancer.registerWidget({
         this.excelName = 'download.xlsx';
         $container.html(tpl({
             locale: locale(),
-            outputExcel: profile.outputExcel
+            outputExcel: profile.outputExcel,
+            containerId: that.id()
         })).addClass('xlsx-parser');
 
         //更新数据
@@ -98,9 +99,10 @@ Enhancer.registerWidget({
         }
         //上传Excel
         $container.on('click', '#loadExcel', function() {
-            $('#fileLoader').click();
+            $container.find('#fileLoader').click();
         })
         $container.on('change', '#fileLoader', function(e) {
+            var id = $(this).attr('containerid');
             var f = e.target.files[0];
             if (!f) {
                 return
