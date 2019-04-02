@@ -1,6 +1,5 @@
 ## Enhancer三方组件 xlsx-parser 使用说明
-### 查看Demo 【账号】visit 【密码】111111
-### 简介 [Demo](http://47.96.99.14:5301/#107)
+### 简介
 - xlsx-parser是基于[Enhancer](https://enhancer.io)平台开发的组件, 能在此平台上良好运行。
 - xlsx-parser可将 数据 , Html 和 Excel 任意转换。
 
@@ -56,7 +55,7 @@
 - 【事件 ID】onCellBlur
 - 【触发时机】页面表格失去焦点时。
 
-### 可用变量说明 [Demo](http://47.96.99.14:5301/#105)
+### 可用变量说明
 #### EXCEL_DATA
 - 【类型】object
 - 【说明】Excel数据
