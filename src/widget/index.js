@@ -170,7 +170,6 @@ Enhancer.registerWidget({
             'CURR_CELL_POS': CURR_CELL_POS,
             'CURR_CELL_CONTENT': CURR_CELL_CONTENT
         }
-        console.log(data)
         return data;
     },
     isValid: function() {
