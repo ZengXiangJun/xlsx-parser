@@ -10,6 +10,7 @@ Enhancer.registerWidget({
             outputExcel: true
         }, profile);
         var $container = this.getContainer();
+        this.profile = profile;
         this.$container = $container;
         var that = this;
         this.workbook = {};
@@ -83,20 +84,6 @@ Enhancer.registerWidget({
             $container.find('.sheetWindow table td').removeAttr('isCurr');
             $(this).attr('isCurr', 'true');
         })
-        //初始化加载数据
-        if (profile.loadData) {
-            this.getSourceData(profile.srcId, {}, function(data){
-                if (data.rows) {
-                    data = data.rows;
-                }
-                that.workbook = XLSX.utils.book_new();
-                var sheet = XLSX.utils.json_to_sheet(data);
-                XLSX.utils.book_append_sheet(that.workbook, sheet, 'Sheet1');
-                that.affected();
-            })
-        } else {
-            this.affected();
-        }
         //上传Excel
         $container.on('click', '#loadExcel', function() {
             $container.find('#fileLoader').click();
@@ -121,7 +108,7 @@ Enhancer.registerWidget({
                         dateNF: 'h:mm AM/PM',
                         sheetStubs: true
                     });
-                    that.affected();
+                    that.__initSheet();
                 }
                 reader.readAsArrayBuffer(f);
             } else {
@@ -129,6 +116,8 @@ Enhancer.registerWidget({
                 alert('请上传 xls 或 xlsx 格式的文件！');
             }
         })
+        //初始化加载数据
+        this.affected();
         return $container;
     },
     onFrameReady: function(zContext) {},
@@ -181,6 +170,7 @@ Enhancer.registerWidget({
             'CURR_CELL_POS': CURR_CELL_POS,
             'CURR_CELL_CONTENT': CURR_CELL_CONTENT
         }
+        console.log(data)
         return data;
     },
     isValid: function() {
@@ -188,6 +178,25 @@ Enhancer.registerWidget({
         return true
     },
     affected: function(zContext, page) {
+        var profile = this.profile;
+        var that = this;
+        if (profile.loadData) {
+            this.getSourceData(profile.srcId, {}, function(data){
+                if (data.rows) {
+                    data = data.rows;
+                }
+                that.workbook = XLSX.utils.book_new();
+                var sheet = XLSX.utils.json_to_sheet(data);
+                XLSX.utils.book_append_sheet(that.workbook, sheet, 'Sheet1');
+                that.__initSheet();
+                that.trig('complete');
+            })
+        } else {
+            that.__initSheet();
+            that.trig('complete');
+        }
+    },
+    __initSheet: function() {
         var $container = this.getContainer();
         var profile = this.profile;
         $container.find('.sheetWindow').html('');
@@ -205,6 +214,5 @@ Enhancer.registerWidget({
         }
         $container.find('.operate a').button();
         $container.find('.sheets a:first-child').click();
-        this.trig('complete');
     }
 });

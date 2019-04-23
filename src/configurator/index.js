@@ -32,17 +32,11 @@ var configurator = {
         $('#outputExcel').prop('checked', profile.outputExcel);
     },
     getProfile: function() {
-        var srcId = $('#dataWrap').attr('srcId');
-        var loadData = $('#outputExcel').val();
-        if (loadData && !srcId) {
-            alert('请设置数据源');
-        } else {
-            return {
-                srcId: $('#dataWrap').attr('srcId'),
-                loadData: $('#loadData').prop('checked'),
-                editExcel: $('#editExcel').prop('checked'),
-                outputExcel: $('#outputExcel').prop('checked')
-            }
+        return {
+            srcId: $('#dataWrap').attr('srcId'),
+            loadData: $('#loadData').prop('checked'),
+            editExcel: $('#editExcel').prop('checked'),
+            outputExcel: $('#outputExcel').prop('checked')
         }
     },
     getSupportedEventList: function(profile) {
