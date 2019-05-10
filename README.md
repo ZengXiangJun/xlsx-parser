@@ -1,5 +1,5 @@
 ## Enhancer三方组件 xlsx-parser 使用说明
-### 简介sss
+### 简介
 - xlsx-parser是基于[Enhancer](https://enhancer.io)平台开发的组件, 能在此平台上良好运行。
 - xlsx-parser可将 数据 , Html 和 Excel 任意转换。
 
