@@ -42,6 +42,26 @@ Enhancer.registerWidget({
             $(this).addClass('ui-state-highlight').siblings('a').removeClass('ui-state-highlight');
             var name = $(this).attr('name');
             var sheet = $(this).data('sheet');
+            Object.keys(sheet).forEach(function(item, index) {
+                if (sheet[item].v) {
+                    if (sheet[item].t === 'd') {
+                        var time = new Date(sheet[item].v);
+                        var year = time.getFullYear();
+                        var month = time.getMonth() + 1 + '';
+                        if (month.length === 1) {
+                            month = 0 + month;
+                        }
+                        var date = time.getDate() + '';
+                        if (date.length === 1) {
+                            date = 0 + date;
+                        }
+                        sheet[item].w = year + '-' + month + '-' + date;
+                    } 
+                    if (sheet[item].t === 's') {
+                        sheet[item].w = sheet[item].v.replace(/(^\s*)|(\s*$)/g, "");
+                    }
+                }
+            })
             var table = XLSX.utils.sheet_to_html(sheet, {
                 id: name,
                 editable: true

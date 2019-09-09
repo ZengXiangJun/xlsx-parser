@@ -14,3 +14,4 @@ assembly
 build
 release
 preview
+pnpm-lock.yaml

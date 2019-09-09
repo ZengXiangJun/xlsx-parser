@@ -359,6 +359,7 @@ module.exports = function (env) {
     cors: true,
     open: 'external',
     notify: false,
+    ghostMode: false,
     https: env ? env.https : false,
     server: { 
       baseDir: ['.'],
@@ -366,6 +367,12 @@ module.exports = function (env) {
       files: ['src/**/*.js', 'src/**/*.less', 'src/**/*.html'],
       middleware: function(req, res, next) {
         const url = req.url.split('?')[0];
+        if (req.method === 'POST') {
+          const name = req.url.match(/\?wname=([^&]+)/)[1];
+          if (name != 'xlsx-parser') {
+            return res.end(JSON.stringify({success: false}))
+          }
+        }
         if (url === '/profile') {
           res.writeHead(200, {
             'Content-Type': 'application/json' 
