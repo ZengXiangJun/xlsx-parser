@@ -115,22 +115,7 @@ Enhancer.registerWidget({
                 return
             }
             if (/.xls$/.test(f.name) || /.xlsx$/.test(f.name)) {
-                that.excelName = f.name;
-                var reader = new FileReader();
-                reader.onload = function (e) {
-                    that.workbook = XLSX.read(new Uint8Array(e.target.result), {
-                        type: 'array',
-                        cellFormula: false,
-                        cellHTML: true,
-                        cellText: false,
-                        cellStyles: true,
-                        cellDates: true,
-                        dateNF: 'h:mm AM/PM',
-                        sheetStubs: true
-                    });
-                    that.__initSheet();
-                }
-                reader.readAsArrayBuffer(f);
+                that.upload_sheet(f);
             } else {
                 $(this).val('');
                 alert('请上传 xls 或 xlsx 格式的文件！');
@@ -233,5 +218,24 @@ Enhancer.registerWidget({
         }
         $container.find('.operate a').button();
         $container.find('.sheets a:first-child').click();
+    },
+    upload_sheet: function(f) {
+        var that = this;
+        that.excelName = f.name;
+        var reader = new FileReader();
+        reader.onload = function (e) {
+            that.workbook = XLSX.read(new Uint8Array(e.target.result), {
+                type: 'array',
+                cellFormula: false,
+                cellHTML: true,
+                cellText: false,
+                cellStyles: true,
+                cellDates: true,
+                dateNF: 'h:mm AM/PM',
+                sheetStubs: true
+            });
+            that.__initSheet();
+        }
+        reader.readAsArrayBuffer(f);
     }
 });
