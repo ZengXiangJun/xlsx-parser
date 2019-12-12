@@ -114,7 +114,7 @@ Enhancer.registerWidget({
             if (!f) {
                 return
             }
-            if (/.xls$/.test(f.name) || /.xlsx$/.test(f.name)) {
+            if (/.xls$/i.test(f.name) || /.xlsx$/i.test(f.name)) {
                 that.upload_sheet(f);
             } else {
                 $(this).val('');
