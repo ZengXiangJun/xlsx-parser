@@ -1,18 +1,21 @@
 require('./index.less');
 var locale = require('./i18n');
 var tpl = require('./index.html');
-var XLSX = require('xlsx');
+
 Enhancer.registerWidget({
     construct: function(profile, zContext) {
+        this.XLSX = require('xlsx');
+
         profile = $.extend({
             loadData: false,
             editExcel: true,
             outputExcel: true
         }, profile);
+
+        var that = this;
         var $container = this.getContainer();
         this.profile = profile;
         this.$container = $container;
-        var that = this;
         this.workbook = {};
         this.excelName = 'download.xlsx';
         $container.html(tpl({
@@ -25,7 +28,7 @@ Enhancer.registerWidget({
         function updateWb() {
             var $table = $container.find('.sheetWindow table');
             var name = $table.attr('id');
-            var data = XLSX.utils.table_to_sheet($table[0]);
+            var data = that.XLSX.utils.table_to_sheet($table[0]);
             $container.find('.sheets a[name="' + name + '"]').data('sheet', data);
             $container.find('.sheets a').map(function() {
                 var name = $(this).attr('name');
@@ -62,7 +65,7 @@ Enhancer.registerWidget({
                     }
                 }
             })
-            var table = XLSX.utils.sheet_to_html(sheet, {
+            var table = that.XLSX.utils.sheet_to_html(sheet, {
                 id: name,
                 editable: true
             });
@@ -79,7 +82,7 @@ Enhancer.registerWidget({
         $container.find('#outputExcel').click(function() {
             if (that.workbook.Sheets) {
                 updateWb();
-                XLSX.writeFile(that.workbook, that.excelName);
+                that.XLSX.writeFile(that.workbook, that.excelName);
                 that.trig('onExcelOutputed');
             }
         })
@@ -140,7 +143,7 @@ Enhancer.registerWidget({
         if (CURR_SHEET_NAME) {
             CURR_SHEET = this.workbook.Sheets[CURR_SHEET_NAME]
         }
-        var CURR_SHEET_TO_JSON = XLSX.utils.sheet_to_json(CURR_SHEET);
+        var CURR_SHEET_TO_JSON = this.XLSX.utils.sheet_to_json(CURR_SHEET);
         var CURR_SHEET_ROWS = CURR_SHEET_TO_JSON.length;
         var CURR_SHEET_COLS = 0;
         CURR_SHEET_TO_JSON.forEach(function(val) {
@@ -156,9 +159,9 @@ Enhancer.registerWidget({
             CURR_CELL_CONTENT = CURR_SHEET[CURR_CELL_POS].v;
         }
         for (var key in this.workbook.Sheets) {
-            SHEETS_TO_CSV[key] = XLSX.utils.sheet_to_csv(this.workbook.Sheets[key]);
-            SHEETS_TO_JSON[key] = XLSX.utils.sheet_to_json(this.workbook.Sheets[key]);
-            SHEETS_TO_FORMULAE[key] = XLSX.utils.sheet_to_formulae(this.workbook.Sheets[key]);
+            SHEETS_TO_CSV[key] = this.XLSX.utils.sheet_to_csv(this.workbook.Sheets[key]);
+            SHEETS_TO_JSON[key] = this.XLSX.utils.sheet_to_json(this.workbook.Sheets[key]);
+            SHEETS_TO_FORMULAE[key] = this.XLSX.utils.sheet_to_formulae(this.workbook.Sheets[key]);
         }
         var data = {
             'EXCEL_DATA': EXCEL_DATA,
@@ -186,12 +189,13 @@ Enhancer.registerWidget({
         var that = this;
         if (profile.loadData) {
             this.getSourceData(profile.srcId, {}, function(data){
+                console.log(data);
                 if (data.rows) {
                     data = data.rows;
                 }
-                that.workbook = XLSX.utils.book_new();
-                var sheet = XLSX.utils.json_to_sheet(data);
-                XLSX.utils.book_append_sheet(that.workbook, sheet, 'Sheet1');
+                that.workbook = that.XLSX.utils.book_new();
+                var sheet = that.XLSX.utils.json_to_sheet(data);
+                that.XLSX.utils.book_append_sheet(that.workbook, sheet, 'Sheet1');
                 that.__initSheet();
                 that.trig('complete');
             })
@@ -224,7 +228,7 @@ Enhancer.registerWidget({
         that.excelName = f.name;
         var reader = new FileReader();
         reader.onload = function (e) {
-            that.workbook = XLSX.read(new Uint8Array(e.target.result), {
+            that.workbook = that.XLSX.read(new Uint8Array(e.target.result), {
                 type: 'array',
                 cellFormula: false,
                 cellHTML: true,

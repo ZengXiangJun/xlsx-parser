@@ -1,6 +1,6 @@
 ## Enhancer三方组件 xlsx-parser 使用说明
 ### 简介
-- xlsx-parser是基于[Enhancer](https://enhancer.io)平台开发的组件, 能在此平台上良好运行。
+- xlsx-parser是基于[Enhancer](https://enhancer.io)平台开发的组件。
 - xlsx-parser可将 数据 , Html 和 Excel 任意转换。
 
 ### 生成界面
@@ -32,7 +32,6 @@
 - 将Excel导入并解析为多种格式数据
 - 可通过页面简单修改Excel文件
 
-
 ### 可用事件说明
 #### 加载Excel（On Excel Loaded）
 - 【事件 ID】onExcelLoaded
@@ -45,7 +44,6 @@
 #### 单击表格（On Sheet Click）
 - 【事件 ID】onSheetClick
 - 【触发时机】单击页面上表格时。
-
 
 #### 单元格获得焦点（On Cell Focus）
 - 【事件 ID】onCellFocus
@@ -121,7 +119,5 @@
 - 【说明】当前单元格内容
 - 【示例】"统计"
 
-
 ### 其它
-- [Enhancer 教程](https://enhancer.io/tutorials)
 - [Enhancer 社区](https://forum.enhancer.io/#p=1&t=5)
