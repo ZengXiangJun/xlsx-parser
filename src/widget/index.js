@@ -64,7 +64,7 @@ Enhancer.registerWidget({
                         sheet[item].w = sheet[item].v.replace(/(^\s*)|(\s*$)/g, "");
                     }
                 }
-            })
+            });
             var table = that.XLSX.utils.sheet_to_html(sheet, {
                 id: name,
                 editable: true
@@ -86,7 +86,7 @@ Enhancer.registerWidget({
                 that.trig('onExcelOutputed');
             }
         })
-        //单击sheet 
+        // 单击sheet 
         $container.on('click', '.sheetWindow table', function() {
             that.trig('onSheetClick');
         })
@@ -94,12 +94,12 @@ Enhancer.registerWidget({
         $container.on('focus', '.sheetWindow table td span', function() {
             that.trig('onCellFocus');
         })
-        //单元格blur
+        // 单元格blur
         $container.on('blur', '.sheetWindow table td span', function() {
             updateWb();
             that.trig('onCellBlur');
         })
-        //单元格click
+        // 单元格click
         $container.on('click', '.sheetWindow table td', function() {
             if (profile.editExcel) {
                 $(this).find('span').focus();
@@ -107,7 +107,7 @@ Enhancer.registerWidget({
             $container.find('.sheetWindow table td').removeAttr('isCurr');
             $(this).attr('isCurr', 'true');
         })
-        //上传Excel
+        // 上传Excel
         $container.on('click', '#loadExcel', function() {
             $container.find('#fileLoader').click();
         })
@@ -124,7 +124,7 @@ Enhancer.registerWidget({
                 alert('请上传 xls 或 xlsx 格式的文件！');
             }
         })
-        //初始化加载数据
+
         this.affected();
         return $container;
     },
@@ -181,15 +181,13 @@ Enhancer.registerWidget({
         return data;
     },
     isValid: function() {
-        var $container = this.$container;
-        return true
+        return true;
     },
     affected: function(zContext, page) {
         var profile = this.profile;
         var that = this;
         if (profile.loadData) {
             this.getSourceData(profile.srcId, {}, function(data){
-                console.log(data);
                 if (data.rows) {
                     data = data.rows;
                 }
