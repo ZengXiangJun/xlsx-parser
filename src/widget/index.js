@@ -143,7 +143,7 @@ Enhancer.registerWidget({
         if (CURR_SHEET_NAME) {
             CURR_SHEET = this.workbook.Sheets[CURR_SHEET_NAME]
         }
-        var CURR_SHEET_TO_JSON = this.XLSX.utils.sheet_to_json(CURR_SHEET);
+        var CURR_SHEET_TO_JSON = this.XLSX.utils.sheet_to_json(CURR_SHEET, {raw: false});
         var CURR_SHEET_ROWS = CURR_SHEET_TO_JSON.length;
         var CURR_SHEET_COLS = 0;
         CURR_SHEET_TO_JSON.forEach(function(val) {
@@ -160,7 +160,7 @@ Enhancer.registerWidget({
         }
         for (var key in this.workbook.Sheets) {
             SHEETS_TO_CSV[key] = this.XLSX.utils.sheet_to_csv(this.workbook.Sheets[key]);
-            SHEETS_TO_JSON[key] = this.XLSX.utils.sheet_to_json(this.workbook.Sheets[key]);
+            SHEETS_TO_JSON[key] = this.XLSX.utils.sheet_to_json(this.workbook.Sheets[key], {raw: false});
             SHEETS_TO_FORMULAE[key] = this.XLSX.utils.sheet_to_formulae(this.workbook.Sheets[key]);
         }
         var data = {
@@ -249,8 +249,8 @@ Enhancer.registerWidget({
                 cellHTML: true,
                 // cellText: false,
                 cellStyles: true,
-                cellDates: true,
-                dateNF: 'h:mm AM/PM',
+                cellDates: false,
+                // dateNF: 'h:mm AM/PM',
                 sheetStubs: true
             });
             that.__initSheet();

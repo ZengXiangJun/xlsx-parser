@@ -13,7 +13,7 @@ module.exports = {
     "C": 33
 }]`,
   widgetConfig: '组件配置',
-  loadData: '导入数据',
+  loadData: '绑定数据源',
   editExcel: '编辑表格',
   outputExcel: '导出表格',
   onExcelLoaded: 'Excel加载完毕时',
