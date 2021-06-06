@@ -8,6 +8,13 @@ const BUILD_PATH = path.resolve(__dirname, 'build');
 const prod = process.env.NODE_ENV === "production";
 const package = require('./package.json');
 
+try {
+  fs.accessSync('./preview');
+} catch (e) {
+  console.log('检测到组件根目录下没有 preview 目录, 请执行 ewtool preview 来重新生成 preview 目录')
+  process.exit(0)
+}
+
 
 let mobileEnv = '';
 let ret = [];

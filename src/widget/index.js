@@ -225,12 +225,29 @@ Enhancer.registerWidget({
         var that = this;
         that.excelName = f.name;
         var reader = new FileReader();
+        var rABS = typeof FileReader !== 'undefined' && FileReader.prototype && FileReader.prototype.readAsBinaryString;
         reader.onload = function (e) {
-            that.workbook = that.XLSX.read(new Uint8Array(e.target.result), {
-                type: 'array',
+            var d = e.target.result;
+            var arr;
+            var readtype = rABS ? 'binary' : 'base64';
+
+            function fixdata(data) {
+                var o = "", l = 0, w = 10240;
+                for(; l<data.byteLength/w; ++l)
+                o+=String.fromCharCode.apply(null,new Uint8Array(data.slice(l*w,l*w+w)));
+                o+=String.fromCharCode.apply(null, new Uint8Array(data.slice(o.length)));
+                return o;
+            }
+
+            if(!rABS) {
+                arr = fixdata(d);
+                d = btoa(arr);
+            }
+            that.workbook = that.XLSX.read(d, {
+                type: readtype,
                 cellFormula: false,
                 cellHTML: true,
-                cellText: false,
+                // cellText: false,
                 cellStyles: true,
                 cellDates: true,
                 dateNF: 'h:mm AM/PM',
@@ -238,6 +255,10 @@ Enhancer.registerWidget({
             });
             that.__initSheet();
         }
-        reader.readAsArrayBuffer(f);
+        if (rABS) {
+            reader.readAsBinaryString(f);
+        } else {
+            reader.readAsArrayBuffer(f);
+        };
     }
 });
