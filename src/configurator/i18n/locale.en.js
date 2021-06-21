@@ -16,6 +16,7 @@ module.exports = {
   loadData: 'Load Data',
   editExcel: 'Edit Excel',
   outputExcel: 'Output Excel',
+  raw: 'RAW',
   onExcelLoaded: 'On Excel Loaded',
   onExcelOutputed: 'On Excel Outputed',
   onSheetClick: 'On Sheet Click',

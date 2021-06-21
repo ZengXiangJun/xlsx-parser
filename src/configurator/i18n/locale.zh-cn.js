@@ -16,6 +16,7 @@ module.exports = {
   loadData: '绑定数据源',
   editExcel: '编辑表格',
   outputExcel: '导出表格',
+  raw: 'RAW',
   onExcelLoaded: 'Excel加载完毕时',
   onExcelOutputed: 'Excel导出完毕时',
   onSheetClick: '单击表格时',

@@ -9,7 +9,8 @@ Enhancer.registerWidget({
         profile = $.extend({
             loadData: false,
             editExcel: true,
-            outputExcel: true
+            outputExcel: true,
+            raw: false
         }, profile);
 
         var that = this;
@@ -130,6 +131,7 @@ Enhancer.registerWidget({
     },
     onFrameReady: function(zContext) {},
     getData: function() {
+        var profile = this.profile;
         var $container = this.$container;
         var $currSheet = $container.find('.sheetWindow table');
         var EXCEL_DATA = this.workbook || {};
@@ -143,7 +145,7 @@ Enhancer.registerWidget({
         if (CURR_SHEET_NAME) {
             CURR_SHEET = this.workbook.Sheets[CURR_SHEET_NAME]
         }
-        var CURR_SHEET_TO_JSON = this.XLSX.utils.sheet_to_json(CURR_SHEET, {raw: false});
+        var CURR_SHEET_TO_JSON = this.XLSX.utils.sheet_to_json(CURR_SHEET, {raw: profile.raw || false});
         var CURR_SHEET_ROWS = CURR_SHEET_TO_JSON.length;
         var CURR_SHEET_COLS = 0;
         CURR_SHEET_TO_JSON.forEach(function(val) {
@@ -160,7 +162,7 @@ Enhancer.registerWidget({
         }
         for (var key in this.workbook.Sheets) {
             SHEETS_TO_CSV[key] = this.XLSX.utils.sheet_to_csv(this.workbook.Sheets[key]);
-            SHEETS_TO_JSON[key] = this.XLSX.utils.sheet_to_json(this.workbook.Sheets[key], {raw: false});
+            SHEETS_TO_JSON[key] = this.XLSX.utils.sheet_to_json(this.workbook.Sheets[key], {raw: profile.raw || false});
             SHEETS_TO_FORMULAE[key] = this.XLSX.utils.sheet_to_formulae(this.workbook.Sheets[key]);
         }
         var data = {

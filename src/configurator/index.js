@@ -12,7 +12,8 @@ var configurator = {
         profile = $.extend({
             loadData: false,
             editExcel: true,
-            outputExcel: true
+            outputExcel: true,
+            raw: false
         }, profile);
         var title = locale('title');
         var dataSpecification = locale('dataSpecification');
@@ -30,13 +31,15 @@ var configurator = {
         $('#loadData').prop('checked', profile.loadData);
         $('#editExcel').prop('checked', profile.editExcel);
         $('#outputExcel').prop('checked', profile.outputExcel);
+        $('#raw').prop('checked', profile.raw);
     },
     getProfile: function() {
         return {
             srcId: $('#dataWrap').attr('srcId'),
             loadData: $('#loadData').prop('checked'),
             editExcel: $('#editExcel').prop('checked'),
-            outputExcel: $('#outputExcel').prop('checked')
+            outputExcel: $('#outputExcel').prop('checked'),
+            raw: $('#raw').prop('checked')
         }
     },
     getSupportedEventList: function(profile) {
