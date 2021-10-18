@@ -79,7 +79,7 @@ Enhancer.registerWidget({
             that.trig('onExcelLoaded');
         })
 
-        //导出数据
+        // 导出数据
         $container.find('#outputExcel').click(function() {
             if (that.workbook.Sheets) {
                 updateWb();
@@ -91,12 +91,13 @@ Enhancer.registerWidget({
         $container.on('click', '.sheetWindow table', function() {
             that.trig('onSheetClick');
         })
-        //单元格focus
+        // 单元格focus
         $container.on('focus', '.sheetWindow table td span', function() {
             that.trig('onCellFocus');
         })
         // 单元格blur
         $container.on('blur', '.sheetWindow table td span', function() {
+            $(this).parent('td').removeAttr('v');
             updateWb();
             that.trig('onCellBlur');
         })
