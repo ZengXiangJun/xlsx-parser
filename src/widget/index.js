@@ -148,12 +148,6 @@ Enhancer.registerWidget({
         }
         var CURR_SHEET_TO_JSON = this.XLSX.utils.sheet_to_json(CURR_SHEET, {raw: profile.raw || false});
         var CURR_SHEET_ROWS = CURR_SHEET_TO_JSON.length;
-        var CURR_SHEET_COLS = 0;
-        CURR_SHEET_TO_JSON.forEach(function(val) {
-            if (Object.getOwnPropertyNames(val).length - 1 > CURR_SHEET_COLS) {
-                CURR_SHEET_COLS = Object.getOwnPropertyNames(val).length - 1;
-            }
-        })
         var $cell = $currSheet.find('td[isCurr="true"]');
         var CURR_CELL_POS = null;
         var CURR_CELL_CONTENT = null;
@@ -166,6 +160,18 @@ Enhancer.registerWidget({
             SHEETS_TO_JSON[key] = this.XLSX.utils.sheet_to_json(this.workbook.Sheets[key], {raw: profile.raw || false});
             SHEETS_TO_FORMULAE[key] = this.XLSX.utils.sheet_to_formulae(this.workbook.Sheets[key]);
         }
+
+        var CURR_SHEET_COLS = 0;
+        if (SHEETS_TO_CSV[CURR_SHEET_NAME]) {
+            if (SHEETS_TO_CSV[CURR_SHEET_NAME].split('\n')[0] !== '') {
+                CURR_SHEET_COLS = SHEETS_TO_CSV[CURR_SHEET_NAME].split('\n')[0].split(',').length;
+            }
+        }
+        // CURR_SHEET_TO_JSON.forEach(function(val) {
+        //     if (Object.getOwnPropertyNames(val).length - 1 > CURR_SHEET_COLS) {
+        //         CURR_SHEET_COLS = Object.getOwnPropertyNames(val).length - 1;
+        //     }
+        // })
         var data = {
             'EXCEL_DATA': EXCEL_DATA,
             'SHEET_NAMES': SHEET_NAMES,
