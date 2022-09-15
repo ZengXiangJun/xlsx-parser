@@ -66,6 +66,7 @@ Enhancer.registerWidget({
                     }
                 }
             });
+            console.log(sheet);
             var table = that.XLSX.utils.sheet_to_html(sheet, {
                 id: name,
                 editable: true
